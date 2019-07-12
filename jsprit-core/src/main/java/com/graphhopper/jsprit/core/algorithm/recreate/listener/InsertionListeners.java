@@ -67,6 +67,14 @@ public class InsertionListeners {
         }
     }
 
+    public void informInsertionEndsListeners(Collection<VehicleRoute> vehicleRoutes) {
+        for (InsertionListener l : listeners) {
+            if (l instanceof InsertionEndsListener) {
+                ((InsertionEndsListener) l).informInsertionEnds(vehicleRoutes);
+            }
+        }
+    }
+
     public void informInsertionEndsListeners(Collection<VehicleRoute> vehicleRoutes, Collection<Job> badJobs) {
         for (InsertionListener l : listeners) {
             if (l instanceof InsertionEndsListener) {
