@@ -376,6 +376,13 @@ public class AlgorithmEventsRecorder implements RuinListener, IterationStartsLis
     }
 
     @Override
+    public void informInsertionEnds(Collection<VehicleRoute> vehicleRoutes) {
+        if (!record()) return;
+        fileSink.stepBegins(graph.getId(), 0, CLEAR_SOLUTION);
+        removeRoutes(vehicleRoutes);
+    }
+
+    @Override
     public void informInsertionEnds(Collection<VehicleRoute> vehicleRoutes, Collection<Job> badJobs) {
         if (!record()) return;
         fileSink.stepBegins(graph.getId(), 0, CLEAR_SOLUTION);

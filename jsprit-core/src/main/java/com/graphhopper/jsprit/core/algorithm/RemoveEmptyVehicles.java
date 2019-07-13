@@ -42,6 +42,17 @@ public class RemoveEmptyVehicles implements InsertionEndsListener {
     }
 
     @Override
+    public void informInsertionEnds(Collection<VehicleRoute> vehicleRoutes) {
+        List<VehicleRoute> routes = new ArrayList<>(vehicleRoutes);
+        for (VehicleRoute route : routes) {
+            if (route.isEmpty()) {
+                fleetManager.unlock(route.getVehicle());
+                vehicleRoutes.remove(route);
+            }
+        }
+    }
+
+    @Override
     public void informInsertionEnds(Collection<VehicleRoute> vehicleRoutes, Collection<Job> badJobs) {
         List<VehicleRoute> routes = new ArrayList<>(vehicleRoutes);
         for (VehicleRoute route : routes) {
